@@ -44,7 +44,7 @@ virtualenv myenv
 
 ```bash
 pip3 install selenium beautifulsoup4 webdriver-manager urllib3==1.26.16 list
-pip install openpyxl pandas lxml
+pip3 install openpyxl pandas lxml
 
 ```
 
@@ -123,7 +123,7 @@ python3 spider.py
 1. **安装 `virtualenv`**：
    - 运行以下命令来使用 `pip` 安装 `virtualenv`：
      ```bash
-     pip install virtualenv
+     pip3 install virtualenv
      ```
 
 2. **创建虚拟环境**：
@@ -148,7 +148,7 @@ python3 spider.py
 4. **安装项目依赖**：
    - 在虚拟环境中，你可以用 `pip` 安装所需的依赖包：
      ```bash
-     pip install <package_name>
+     pip3 install <package_name>
      ```
 
 5. **退出虚拟环境**：
