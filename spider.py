@@ -8,6 +8,7 @@ from webdriver_manager.firefox import GeckoDriverManager
 from bs4 import BeautifulSoup
 import pandas as pd
 import re
+import os
 import random
 import time
 from io import StringIO
@@ -44,8 +45,7 @@ def auto_adjust_column_width(excel_file_path):
 
   
 # 构建公司公告页面URL
-def build_announcement_urls(stock_id):
-    reportTypes = ['zqbg', 'ndbg'];
+def build_announcement_urls(stock_id, reportTypes):
     urls = [];
     for currentType in reportTypes:
         url = f'https://vip.stock.finance.sina.com.cn/corp/go.php/vCB_Bulletin/stockid/{stock_id}/page_type/{currentType}.phtml'
@@ -62,8 +62,10 @@ options.add_argument('--disable-dev-shm-usage')
 
 
 # 指定 geckodriver 的路径，使用 Service 来设置
-service = Service('/usr/local/bin/geckodriver')
-# service = Service(GeckoDriverManager().install(), port=0)
+# service = Service('/usr/local/bin/geckodriver')
+# service = Service('D:\\work\\GitHub\\files\\geckodriver.exe')
+# 动态获取，不需要像上面一样判断系统是mac还是window
+service = Service(GeckoDriverManager().install(), port=0)
 
 
 # 创建 WebDriver 实例
@@ -96,8 +98,8 @@ def get_reports_urls(soup, years):
     return links
 
 # 获取公司最新的年度报告和半年度报告链接
-def get_latest_reports_urls(stock_id, years):
-    urls = build_announcement_urls(stock_id)
+def get_latest_reports_urls(stock_id, years, reportTypes):
+    urls = build_announcement_urls(stock_id, reportTypes)
     report_urls = {}  # 初始化字典，避免在异常情况下未定义
     for url in urls:
         driver.get(url)
@@ -133,11 +135,47 @@ def get_latest_reports_urls(stock_id, years):
     return report_urls
 
 
+
+# 目标目录
+directory = './dist'
+
+# 初始化存放 reports 文件名的列表
+reports_files = []
+
+# 正则表达式匹配以 'reports' 开头，后面可选数字，并以 '.xlsx' 结尾的文件
+pattern = r'^reports(\d*)\.xlsx$'
+
+# 遍历 dist 目录下的文件
+for filename in os.listdir(directory):
+    match = re.match(pattern, filename)
+    if match:
+        # 提取文件名中的数字部分
+        num_str = match.group(1)
+        # 如果没有数字部分，默认为 0
+        number = int(num_str) if num_str else 0
+        reports_files.append(number)
+
+# 找到当前最大数字
+if reports_files:
+    max_number = max(reports_files)
+else:
+    max_number = 0
+
+# 下一个文件名
+new_filename = f'reports{max_number + 1}.xlsx'
+
+# 完整的导出路径
+output_file = os.path.join(directory, new_filename)
+
+
+# 继续执行保存 Excel 的操作，例如：
+# df.to_excel(output_file)
+
+
 # 主函数，爬取多个公司的报告并提取研发费用信息
 # 示例：如何调用函数将不同的报告保存到同一个 Excel 文件
-def crawl_reports_for_companies(companies, years, target_tables):
+def crawl_reports_for_companies(companies, years, target_tables, reportTypes = ['zqbg', 'ndbg']):
     results = []
-    output_file = './dist/reports.xlsx'
     
     # 创建 ExcelWriter 对象，用于写入多个 sheet
     with pd.ExcelWriter(output_file, engine='openpyxl') as writer:
@@ -148,7 +186,7 @@ def crawl_reports_for_companies(companies, years, target_tables):
                 print(f"无法找到公司 {company} 的股票代码")
                 continue
 
-            report_urls = get_latest_reports_urls(stock_id, years)
+            report_urls = get_latest_reports_urls(stock_id, years, reportTypes)
             print(f"stock_id {stock_id}  report_urls {report_urls}")
 
             if not report_urls:
@@ -206,7 +244,13 @@ def get_report_content_selenium(report_url, writer, target_tables = ['合并利�
             
             for target_table_name in target_tables:
                 # 寻找目标表格
-                target_p = soup.find_all('p', string=lambda s: s and target_table_name in s and len(s) < 20)[0]
+                target_p_list = soup.find_all('p', string=lambda s: s and target_table_name in s and len(s) < 50)
+    
+                if not target_p_list:
+                    print(f"未找到匹配的表格名称：{target_table_name}")
+                    continue  # 跳过此表格名，继续下一个
+
+                target_p = target_p_list[0]  # 取第一个匹配项
                 combined_df = pd.DataFrame()
 
                 # 遍历表格
@@ -236,9 +280,10 @@ def get_report_content_selenium(report_url, writer, target_tables = ['合并利�
                         font_tag.decompose()
 
                     # 获取 th 标签剩余的文本内容
-                    report_title = th_tag.get_text(strip=True)+f"_{target_table_name}"
+                    report_title = th_tag.get_text(strip=True).replace("：", "")+f"-{target_table_name}"
+                    report_title = report_title.split("表", 1)[0] + "表"
 
-                print(f"report_title: {report_title}_{target_table_name}")
+                print(f"report_title: {report_title}")
 
                 # 将数据写入Excel的不同 sheet
                 sheet_name = report_title if report_title else f"Sheet_{random.randint(1000, 9999)}"
@@ -319,10 +364,11 @@ def get_stock_code_by_company_name(company_name):
 # companies = ['艾为电子','圣邦股份','恒玄科技','杰理科技','纳芯微','中科蓝讯','杰华特','晶丰明源','思瑞浦','芯朋微','力芯微','博通集成','必易微','富满微','炬芯科技','微源股份']
 companies = ['艾为电子','圣邦股份']
 years = [2023, 2024]
-target_tables=['合并利润表']
-
+target_tables=['合并资产负债表2023年6月30日', '合并利润表','合并现金流量表']
+# 'zqbg'是中报, 'ndbg'是年报
+reportTypes = ['zqbg', 'ndbg'];
 
 
 # 爬取报告并提取研发费用信息
-results = crawl_reports_for_companies(companies, years, target_tables)
+results = crawl_reports_for_companies(companies, years, target_tables, reportTypes)
 
