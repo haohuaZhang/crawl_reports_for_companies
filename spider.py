@@ -62,10 +62,10 @@ options.add_argument('--disable-dev-shm-usage')
 
 
 # 指定 geckodriver 的路径，使用 Service 来设置
-# service = Service('/usr/local/bin/geckodriver')
+service = Service('/usr/local/bin/geckodriver')
 # service = Service('D:\\work\\GitHub\\files\\geckodriver.exe')
 # 动态获取，不需要像上面一样判断系统是mac还是window
-service = Service(GeckoDriverManager().install(), port=0)
+# service = Service(GeckoDriverManager().install(), port=0)
 
 
 # 创建 WebDriver 实例
