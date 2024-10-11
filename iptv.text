@@ -1,116 +1,30 @@
-广东频道1,#genre#
-汕头综合,http://156.227.6.81:8081/channel/11dc4f79/index.m3u8
-汕头综合,http://156.227.6.81:8081/channel/2cb93547/index.m3u8
-汕头综合sd,http://156.227.6.81:8081/channel/n1cbef228/index.m3u8
-汕头经济,http://156.227.6.81:8081/channel/11dc634c/index.m3u8
-汕头经济,http://156.227.6.81:8081/channel/2cb9491a/index.m3u8
-汕头经济sd,http://156.227.6.81:8081/channel/n1c748715/index.m3u8
-汕头体育,http://156.227.6.81:8081/channel/2cb39c7a/index.m3u8
-潮州民生,http://156.227.6.81:8081/channel/2e31085a/index.m3u8
-潮安综合,http://156.227.6.81:8081/channel/2e2a70a3/index.m3u8
-饶平,http://156.227.6.81:8081/channel/n77021047/index.m3u8
+#EXTM3U
+#EXT-X-APP APTV
+#EXT-X-APTV-TYPE remote
+#EXT-X-SUB-URL https://raw.githubusercontent.com/haohuaZhang/crawl_reports_for_companies/refs/heads/main/iptv.text
 
-广东频道2,#genre#
-gdzj,http://23.224.189.183:8889/channel/n5b3ba37/index.m3u8?q=1728420178168
-广东ty,http://23.224.189.183:8889/channel/2635cfbe/index.m3u8?q=1728420178168
-广东jj,http://23.224.189.183:8889/channel/2635ce79/index.m3u8?q=1728420178168
-广东ms,http://23.224.189.183:8889/channel/2635cedf/index.m3u8?q=1728420178168
-dwqws,http://23.224.189.183:8889/channel/4f1ab01e/index.m3u8?q=1728420178168
-广东少儿,http://23.224.189.183:8889/channel/26413887/index.m3u8?q=1728420178168
-汕头综合sz,http://23.224.189.183:8889/channel/n1cbef212/index.m3u8?q=1728420178168
-汕头经济sz,http://23.224.189.183:8889/channel/n1c7486ff/index.m3u8?q=1728420178168
-tvb星河,http://23.224.189.183:8889/channel/n71c54a90/index.m3u8?q=1728420178168
-jade,http://23.224.189.183:8889/channel/839b859/index.m3u8?q=1728420178168
-jade-sl,http://23.224.189.183:8889/channel/a498dd2/index.m3u8?q=1728420178168
-tvb plus,http://23.224.189.183:8889/channel/n6280e16a/index.m3u8?q=1728420178168
-翡翠,http://23.224.189.183:8889/channel/n770507e5/index.m3u8?q=1728420178168
-明珠,http://23.224.189.183:8889/channel/n77083472/index.m3u8?q=1728420178168
-凤凰中文,http://23.224.189.183:8889/channel/20931382/index.m3u8?q=1728420178168
-星空卫视,http://23.224.189.183:8889/channel/2a5e4632/index.m3u8?q=1728420178168
-澳亚卫视,http://23.224.189.183:8889/channel/2e14303e/index.m3u8?q=1728420178168
-广东新闻,http://23.224.189.183:8889/channel/2642a784/index.m3u8?q=1728420178168
-广东民生,http://23.224.189.183:8889/channel/26434c67/index.m3u8?q=1728420178168
-大湾区卫视,http://23.224.189.183:8889/channel/65304962/index.m3u8?q=1728420178168
-广东少儿,http://23.224.189.183:8889/channel/26413887/index.m3u8?q=1728420178168
-广东影视,http://23.224.189.183:8889/channel/2641d9ae/index.m3u8?q=1728420178168
-广东体育HD,http://23.224.189.183:8889/channel/n6a43780c/index.m3u8?q=1728420178168
-广东珠江,http://23.224.189.183:8889/channel/264435b8/index.m3u8?q=1728420178168
-广东经济,http://23.224.189.183:8889/channel/26458998/index.m3u8?q=1728420178168
-汕头综合,http://23.224.189.183:8889/channel/2cb93547/index.m3u8?q=1728420178168
-汕头经济,http://23.224.189.183:8889/channel/2cb9491a/index.m3u8?q=1728420178168
-汕头综合sd,http://23.224.189.183:8889/channel/n1cbef228/index.m3u8?q=1728420178168
-汕头经济sd,http://23.224.189.183:8889/channel/n1c748715/index.m3u8?q=1728420178168
-汕头体育,http://23.224.189.183:8889/channel/2cb39c7a/index.m3u8?q=1728420178168
-嘉佳卡通,http://23.224.189.183:8889/channel/226cd5df/index.m3u8?q=1728420178168
-岭南戏曲,http://23.224.189.183:8889/channel/2581d589/index.m3u8?q=1728420178168
-潮州综合,http://23.224.189.183:8889/channel/2e3331b8/index.m3u8?q=1728420178168
-潮州民生,http://23.224.189.183:8889/channel/2e31085a/index.m3u8?q=1728420178168
-潮安综合,http://23.224.189.183:8889/channel/2e2a70a3/index.m3u8?q=1728420178168
-饶平,http://23.224.189.183:8889/channel/n77021047/index.m3u8?q=1728420178168
-中山综合,http://23.224.189.183:8889/channel/1f100c6c/index.m3u8?q=1728420178168
 
-广东频道3,#genre#
-18台,http://ali.hlspull.yximgs.com/live/tboxprovhxqcvfhoeqfqhdoqqqyhcvxclqhqotqyq9qssqfdqcvhthofsqqhyx18.flv
-翡翠台,http://ali.hlspull.yximgs.com/live/tboxprofhwwqpthqyqtqqqxcxbfhqqfqvhdtqdvbtvqsqxqfsqqcvbctvbfc.flv
-翡翠台,http://php.jdshipin.com:8880/TVOD/iptv.php?id=fct3
-翡翠台备用,http://php.jdshipin.com:8880/TVOD/iptv.php?id=fct4
-汕头综合,http://113.67.164.93:8889/udp/239.77.1.130:5146
-汕头综合,http://116.21.120.198:8000/udp/239.77.1.130:5146
-汕头综合,http://113.67.164.93:8888/udp/239.77.1.130:5146
-汕头综合,http://113.101.160.144:8888/udp/239.77.1.130:5146
-汕头综合,http://113.67.164.93:8889/udp/239.77.1.130:5146
-汕头综合,http://113.103.253.123:2000/udp/239.77.1.130:5146
-汕头综合,http://113.83.248.54:4200/udp/239.77.1.130:5146
-汕头生活,http://113.67.164.93:8889/udp/239.253.43.46:5146
-汕头生活,http://116.21.120.198:8000/udp/239.253.43.46:5146
-汕头生活,http://113.67.164.93:8888/udp/239.253.43.46:5146
-汕头生活,http://113.101.160.144:8888/udp/239.253.43.46:5146
-汕头生活,http://113.71.148.79:5555/udp/239.253.43.46:5146
-汕头生活,http://113.103.253.123:2000/udp/239.253.43.46:5146
-汕头生活,http://113.83.248.54:4200/udp/239.253.43.46:5146
-汕头文旅,http://113.67.164.93:8889/udp/239.77.1.132:5146
-汕头文旅,http://116.21.120.198:8000/udp/239.77.1.132:5146
-汕头文旅,http://113.67.164.93:8888/udp/239.77.1.132:5146
-汕头文旅,http://113.101.160.144:8888/udp/239.77.1.132:5146
-汕头文旅,http://113.71.148.79:5555/udp/239.77.1.132:5146
-汕头文旅,http://113.103.253.123:2000/udp/239.77.1.132:5146
-汕头文旅,http://113.83.248.54:4200/udp/239.77.1.132:5146
-揭阳综合,http://113.67.164.93:8889/udp/239.77.0.229:5146
-揭阳综合,http://116.21.120.198:8000/udp/239.77.0.229:5146
-揭阳综合,http://113.67.164.93:8888/udp/239.77.0.229:5146
-揭阳综合,http://113.101.160.144:8888/udp/239.77.0.229:5146
-揭阳综合,http://113.71.148.79:5555/udp/239.77.0.229:5146
-揭阳综合,http://113.103.253.123:2000/udp/239.77.0.229:5146
-揭阳综合,http://113.83.248.54:4200/udp/239.77.0.229:5146
-揭阳生活,http://113.67.164.93:8889/udp/239.77.0.251:5146
-揭阳生活,http://116.21.120.198:8000/udp/239.77.0.251:5146
-揭阳生活,http://113.67.164.93:8888/udp/239.77.0.251:5146
-揭阳生活,http://113.101.160.144:8888/udp/239.77.0.251:5146
-揭阳生活,http://113.71.148.79:5555/udp/239.77.0.251:5146
-揭阳生活,http://113.103.253.123:2000/udp/239.77.0.251:5146
-揭阳生活,http://113.83.248.54:4200/udp/239.77.0.251:5146
-戏曲,http://113.67.164.93:8889/udp/239.77.0.16:5146
-戏曲,http://116.21.120.198:8000/udp/239.77.0.16:5146
-戏曲,http://113.67.164.93:8888/udp/239.77.0.16:5146
-戏曲,http://113.101.160.144:8888/udp/239.77.0.16:5146
-戏曲,http://113.71.148.79:5555/udp/239.77.0.16:5146
-戏曲,http://113.103.253.123:2000/udp/239.77.0.16:5146
-戏曲,http://113.83.248.54:4200/udp/239.77.0.16:5146
-潮州综合,http://time-vod-qhlive.sobeylive.com/czbtv2019/czzhpd.m3u8
-潮州综合,http://14.121.146.163:554/rtp/239.253.43.70:5146
-潮州综合,http://113.103.253.123:2000/rtp/239.253.43.70:5146
-潮州综合,http://113.83.248.54:4200/rtp/239.253.43.70:5146
-潮州民生,http://time-vod-qhlive.sobeylive.com/czbtv2019/czggpd.m3u8
-潮州民生,http://14.121.146.163:554/rtp/239.253.43.75:5146
-潮州民生,http://113.103.253.123:2000/rtp/239.253.43.75:5146
-潮州民生,http://113.83.248.54:4200/rtp/239.253.43.75:5146
-汕头综合,http://php.jdshipin.com:8880/PLTV/iptv.php?id=stzh
-汕头综合,http://156.227.6.81/channel/11dc4f79/index.m3u8?q=1728531789458
+#EXTINF:-1 group-title="港澳台频道",18台
+http://ali.hlspull.yximgs.com/live/tboxprovhxqcvfhoeqfqhdoqqqyhcvxclqhqotqyq9qssqfdqcvhthofsqqhyx18.flv
+#EXTINF:-1 group-title="港澳台频道",翡翠台
+http://php.jdshipin.com:8880/TVOD/iptv.php?id=fct
+#EXTINF:-1 group-title="港澳台频道",翡翠台
+http://php.jdshipin.com:8880/TVOD/iptv.php?id=fct3
+#EXTINF:-1 group-title="港澳台频道",翡翠台
+http://php.jdshipin.com:8880/smt.php?id=jade_twn
+#EXTINF:-1 group-title="港澳台频道",翡翠台
+http://ali.hlspull.yximgs.com/live/tboxprofhwwqpthqyqtqqqxcxbfhqqfqvhdtqdvbtvqsqxqfsqqcvbctvbfc.flv
+#EXTINF:-1 group-title="港澳台频道",TVB J1
+http://php.jdshipin.com:8880/TVOD/iptv.php?id=fct2
+#EXTINF:-1 group-title="港澳台频道",耀才财经
+http://202.69.67.66:443/webcast/bshdlive-pc/playlist.m3u8?wowzasessionid=64000$IPV4『线路1』
+#EXTINF:-1 group-title="港澳台频道",耀才财经
+http://202.69.67.66:443/webcast/bshdlive-pc/playlist.m3u8?wowzasessionid=64000?zgangd$IPV4『线路2』
+#EXTINF:-1 group-title="港澳台频道",亚洲卫视
+https://play-hsbj.vzan.com/slowlive/821481626725612417/live.m3u8?zbid=2046370057&tpid=330913109&type=0$IPV4『线路2』
 
 
 
-港澳台频道,#genre#
-翡翠台,http://php.jdshipin.com:8880/TVOD/iptv.php?id=fct
-翡翠台,http://php.jdshipin.com:8880/smt.php?id=jade_twn
-翡翠台,http://php.jdshipin.com:8880/TVOD/iptv.php?id=fct4
+
+
 
