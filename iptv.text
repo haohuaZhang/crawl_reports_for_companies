@@ -1,5 +1,4 @@
-#广东频道
-广东民生,https://ap02.iqplay.tv:8082/iqb8002/s03btv/chunks.m3u8
+广东频道1#genre#
 汕头综合,http://156.227.6.81:8081/channel/11dc4f79/index.m3u8
 汕头综合,http://156.227.6.81:8081/channel/2cb93547/index.m3u8
 汕头综合sd,http://156.227.6.81:8081/channel/n1cbef228/index.m3u8
@@ -11,8 +10,48 @@
 潮安综合,http://156.227.6.81:8081/channel/2e2a70a3/index.m3u8
 饶平,http://156.227.6.81:8081/channel/n77021047/index.m3u8
 
+广东频道2#genre#
+gdzj,http://23.224.189.183:8889/channel/n5b3ba37/index.m3u8?q=1728420178168
+广东ty,http://23.224.189.183:8889/channel/2635cfbe/index.m3u8?q=1728420178168
+广东jj,http://23.224.189.183:8889/channel/2635ce79/index.m3u8?q=1728420178168
+广东ms,http://23.224.189.183:8889/channel/2635cedf/index.m3u8?q=1728420178168
+dwqws,http://23.224.189.183:8889/channel/4f1ab01e/index.m3u8?q=1728420178168
+广东少儿,http://23.224.189.183:8889/channel/26413887/index.m3u8?q=1728420178168
+汕头综合sz,http://23.224.189.183:8889/channel/n1cbef212/index.m3u8?q=1728420178168
+汕头经济sz,http://23.224.189.183:8889/channel/n1c7486ff/index.m3u8?q=1728420178168
+tvb星河,http://23.224.189.183:8889/channel/n71c54a90/index.m3u8?q=1728420178168
+jade,http://23.224.189.183:8889/channel/839b859/index.m3u8?q=1728420178168
+jade-sl,http://23.224.189.183:8889/channel/a498dd2/index.m3u8?q=1728420178168
+tvb plus,http://23.224.189.183:8889/channel/n6280e16a/index.m3u8?q=1728420178168
+翡翠,http://23.224.189.183:8889/channel/n770507e5/index.m3u8?q=1728420178168
+明珠,http://23.224.189.183:8889/channel/n77083472/index.m3u8?q=1728420178168
+凤凰中文,http://23.224.189.183:8889/channel/20931382/index.m3u8?q=1728420178168
+星空卫视,http://23.224.189.183:8889/channel/2a5e4632/index.m3u8?q=1728420178168
+澳亚卫视,http://23.224.189.183:8889/channel/2e14303e/index.m3u8?q=1728420178168
+广东新闻,http://23.224.189.183:8889/channel/2642a784/index.m3u8?q=1728420178168
+广东民生,http://23.224.189.183:8889/channel/26434c67/index.m3u8?q=1728420178168
+大湾区卫视,http://23.224.189.183:8889/channel/65304962/index.m3u8?q=1728420178168
+广东少儿,http://23.224.189.183:8889/channel/26413887/index.m3u8?q=1728420178168
+广东影视,http://23.224.189.183:8889/channel/2641d9ae/index.m3u8?q=1728420178168
+广东体育HD,http://23.224.189.183:8889/channel/n6a43780c/index.m3u8?q=1728420178168
+广东珠江,http://23.224.189.183:8889/channel/264435b8/index.m3u8?q=1728420178168
+广东经济,http://23.224.189.183:8889/channel/26458998/index.m3u8?q=1728420178168
+汕头综合,http://23.224.189.183:8889/channel/2cb93547/index.m3u8?q=1728420178168
+汕头经济,http://23.224.189.183:8889/channel/2cb9491a/index.m3u8?q=1728420178168
+汕头综合sd,http://23.224.189.183:8889/channel/n1cbef228/index.m3u8?q=1728420178168
+汕头经济sd,http://23.224.189.183:8889/channel/n1c748715/index.m3u8?q=1728420178168
+汕头体育,http://23.224.189.183:8889/channel/2cb39c7a/index.m3u8?q=1728420178168
+嘉佳卡通,http://23.224.189.183:8889/channel/226cd5df/index.m3u8?q=1728420178168
+岭南戏曲,http://23.224.189.183:8889/channel/2581d589/index.m3u8?q=1728420178168
+潮州综合,http://23.224.189.183:8889/channel/2e3331b8/index.m3u8?q=1728420178168
+潮州民生,http://23.224.189.183:8889/channel/2e31085a/index.m3u8?q=1728420178168
+潮安综合,http://23.224.189.183:8889/channel/2e2a70a3/index.m3u8?q=1728420178168
+饶平,http://23.224.189.183:8889/channel/n77021047/index.m3u8?q=1728420178168
+中山综合,http://23.224.189.183:8889/channel/1f100c6c/index.m3u8?q=1728420178168
 
-#港澳台频道
+
+
+港澳台频道#genre#
 翡翠台,http://php.jdshipin.com:8880/TVOD/iptv.php?id=fct
 翡翠台,http://php.jdshipin.com:8880/smt.php?id=jade_twn
 翡翠台,http://php.jdshipin.com:8880/TVOD/iptv.php?id=fct4
