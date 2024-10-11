@@ -1,64 +1,19 @@
 #广东频道
 广东民生,https://ap02.iqplay.tv:8082/iqb8002/s03btv/chunks.m3u8
-汕头综合,http://156.227.6.81/channel/11dc4f79/index.m3u8?q=1728531789458
-汕头综合,http://156.227.6.81/channel/2cb93547/index.m3u8?q=1728531789458
-汕头综合sd,http://156.227.6.81/channel/n1cbef228/index.m3u8?q=1728531789458
-汕头经济,http://156.227.6.81/channel/11dc634c/index.m3u8?q=1728531789458
-汕头经济,http://156.227.6.81/channel/2cb9491a/index.m3u8?q=1728531789458
-汕头经济sd,http://156.227.6.81/channel/n1c748715/index.m3u8?q=1728531789458
-汕头体育,http://156.227.6.81/channel/2cb39c7a/index.m3u8?q=1728531789458
-潮州民生,http://156.227.6.81/channel/2e31085a/index.m3u8?q=1728531789458
-潮安综合,http://156.227.6.81/channel/2e2a70a3/index.m3u8?q=1728531789458
-饶平,http://156.227.6.81/channel/n77021047/index.m3u8?q=1728531789458
+汕头综合,http://156.227.6.81:8081/channel/11dc4f79/index.m3u8?q=1728531789458
+汕头综合,http://156.227.6.81:8081/channel/2cb93547/index.m3u8?q=1728531789458
+汕头综合sd,http://156.227.6.81:8081/channel/n1cbef228/index.m3u8?q=1728531789458
+汕头经济,http://156.227.6.81:8081/channel/11dc634c/index.m3u8?q=1728531789458
+汕头经济,http://156.227.6.81:8081/channel/2cb9491a/index.m3u8?q=1728531789458
+汕头经济sd,http://156.227.6.81:8081/channel/n1c748715/index.m3u8?q=1728531789458
+汕头体育,http://156.227.6.81:8081/channel/2cb39c7a/index.m3u8?q=1728531789458
+潮州民生,http://156.227.6.81:8081/channel/2e31085a/index.m3u8?q=1728531789458
+潮安综合,http://156.227.6.81:8081/channel/2e2a70a3/index.m3u8?q=1728531789458
+饶平,http://156.227.6.81:8081/channel/n77021047/index.m3u8?q=1728531789458
 
 
 #港澳台频道
-翡翠台1,http://223.244.26.190:8082/tvb%E7%BF%A1%E7%BF%A0-%E7%9B%97%E6%BA%90%E8%80%85%E6%AD%BB%E5%85%A8%E5%AE%B6/%E6%98%93%E7%99%BCTV//hls.m3u8
-翡翠台,https://www.zhixun.com.mp/zx.php?id=mytv86
-翡翠台,http://107.167.12.58:27347/livehttpplay?channel_id=20124J2
-翡翠台,https://epg.pw/stream/ba009d94229ed40a5d9289178463fba7aa31fb0622f8ab2d66c01147828743ab.m3u8
-翡翠台,http://122.152.202.33/s/81a8a44f/index.m3u8?id=53
-翡翠台,http://119.125.104.36:9901/tsfile/live/1006_1.m3u8
 翡翠台,http://php.jdshipin.com:8880/TVOD/iptv.php?id=fct
-翡翠台,http://124.244.149.194:65530/bysid/1.m3u8
-翡翠台,http://r.jdshipin.com/qClQf
-翡翠台,http://grandprix2023.asuscomm.com:8889/bysid/1.m3u8
-翡翠台,P2p://generationnexxxt.com:19806/66ae0cd4000ad7abe825afa51f42782f
-翡翠台,http://107.167.12.58:27347/livehttpplay?channel_id=20127
-翡翠台,http://113.64.94.170:9901/tsfile/live/1004_1.m3u8?key=txiptv&playlive=1&down=1
-翡翠台,http://113.83.152.56:8182/bysid/1.m3u8
-翡翠台,https://stream1.freetv.fun/ba009d94229ed40a5d9289178463fba7aa31fb0622f8ab2d66c01147828743ab.m3u8
-翡翠台,http://58.250.155.2:8180/TV00000000000000000032@HHZT
-翡翠台,http://124.244.149.194:65530/bysid/1
 翡翠台,http://php.jdshipin.com:8880/smt.php?id=jade_twn
-翡翠台,http://iptviptv.site:9694/hls/98/index.m3u8
-翡翠台,http://113.83.152.56:8555/bysid/1.m3u8
-翡翠台,http://107.167.12.58:27347/livehttpplay?channel_id=20124
-翡翠台,http://php.jdshipin.com:8880/TVOD/iptv.php?id=fct3
-翡翠台,http://iptviptv.site:9694/hls/99/index.m3u8
-翡翠台,http://fm1077.serv00.net/Smart.php?id=jade_twn
-翡翠台,http://113.83.152.61:1936/bysid/1.m3u8
-翡翠台,https://ali.hlspull.yximgs.com/live/da349e04130b6c9f5be0284957a22767.flv
-翡翠台,http://zw9999.cnstream.top:80/play/ubI0Nrlni6TwusjXuSxNxA5oJl8b5Icz-0MXK7POxcc/ts
 翡翠台,http://php.jdshipin.com:8880/TVOD/iptv.php?id=fct4
-翡翠台,http://r.jdshipin.com/62WM7
-翡翠台,http://r.jdshipin.com/n90gt
-翡翠台,http://nz171l122.bb60246.ctm.net:8889/bysid/1.m3u8
-翡翠台,http://154.29.149.9:9981/stream/test/jade/master.m3u8?u=test&p=8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92
-翡翠台,http://107.167.12.58:27347/livehttpplay?channel_id=30025
-翡翠台,http://beishan008.asuscomm.com:8889/bysid/1.m3u8
-翡翠台,http://zsntlqj.xicp.net:8895/bysid/1.m3u8
-无线翡翠台,http://1b6467f415.iok.la:9931/tsfile/live/1007_1.m3u8
-无线翡翠台,http://185.81.28.58/🥝.php?id=ca9b19519b657d524c001ef858181b5d
-无线翡翠台,http://108.165.240.85/wan8.php?id=8
-无线翡翠台,http://8.134.82.80:777/two.php?key=hello&id=8
-无线翡翠台,http://etv.xhgvip.top/xgtv.php?id=ca9b19519b657d524c001ef858181b5d
-无线翡翠台,p3p://108.181.32.169:46313/6533f5c20003762b2cfef1ac322c6404
-TVB翡翠,http://www.balala.top:9200/channel/n379c44d0/index.m3u8?q=1717838720512
-TVB翡翠,http://123.150.5.131:9000/tvb翡翠盗源可耻/易發TV专用.live.flv
-TVB翡翠,http://ali.hlspull.yximgs.com/live/huanqiuhklivefhwwjpthjyjtjjjxcxbfhjjfjvhdtjdvbtvjsjxjfsjjcvbctvbfc.flv
-TVB翡翠,https://www.zhixun.com.mp/zx.php?id=tvjade
-TVB翡翠台,https://iptv.hiper25.com/TVB/video.m3u8
-TVB翡翠台,https://www.zhixun.com.mp/zx.php?id=tvade
-TVB翡翠台,http://free.xiptv.x10.bz/kudou.php?id=188
-TVB翡翠台,http://extraott.com:80/live/7921751389/6097373662/62827.m3u8
+
