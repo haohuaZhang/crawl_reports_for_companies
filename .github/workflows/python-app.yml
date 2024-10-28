@@ -8,38 +8,36 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 检出代码仓库
       - name: Check out the repository
         uses: actions/checkout@v2
 
-      # 设置 Python 环境
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.x'  # 根据项目要求指定 Python 版本
+          python-version: '3.x'
 
-      # 安装项目依赖
-      - name: Install dependencies
+      # 检查并安装依赖
+      - name: Check and install dependencies
         run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          if test -f "requirements.txt"; then
+            python -m pip install --upgrade pip
+            pip install -r requirements.txt
+          else
+            echo "No requirements.txt file found, skipping dependency installation."
+          fi
 
-      # 运行 spider.py 文件
       - name: Run spider.py
         run: |
           python spider.py
 
-      # 创建 dist 文件夹（如果不存在）
       - name: Create dist directory
         run: mkdir -p dist
 
-      # 将生成的 Excel 文件移动到 dist 文件夹下
       - name: Move Excel file to dist
         run: mv *.xlsx dist/
 
-      # 将 dist 文件夹上传为工作流的输出（可选）
       - name: Upload dist folder
-        uses: actions/upload-artifact@v3  # 使用 v3 版本
+        uses: actions/upload-artifact@v3
         with:
           name: dist-folder
           path: dist/
