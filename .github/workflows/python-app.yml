@@ -39,7 +39,7 @@ jobs:
 
       # 将 dist 文件夹上传为工作流的输出（可选）
       - name: Upload dist folder
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3  # 使用 v3 版本
         with:
           name: dist-folder
           path: dist/
