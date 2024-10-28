@@ -16,9 +16,12 @@ jobs:
         with:
           python-version: '3.x'
 
-      # 安装 Firefox 和 geckodriver
+      # 安装 Firefox 和 GeckoDriver（使用非 Snap 版本）
       - name: Install Firefox and GeckoDriver
         run: |
+          sudo apt-get update
+          sudo apt-get install -y software-properties-common
+          sudo add-apt-repository -y ppa:mozillateam/ppa
           sudo apt-get update
           sudo apt-get install -y firefox
           wget -q https://github.com/mozilla/geckodriver/releases/latest/download/geckodriver-v0.33.0-linux64.tar.gz
@@ -32,6 +35,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install selenium webdriver-manager beautifulsoup4 pandas openpyxl requests
 
+      # 运行 spider.py 文件
       - name: Run spider.py
         run: |
           python spider.py
