@@ -16,16 +16,18 @@ jobs:
         with:
           python-version: '3.x'
 
-      # 检查并安装依赖
-      - name: Check and install dependencies
+      # 安装依赖
+      - name: Install dependencies
         run: |
-          if test -f "requirements.txt"; then
-            python -m pip install --upgrade pip
-            pip install -r requirements.txt
-          else
-            echo "No requirements.txt file found, skipping dependency installation."
-          fi
+          python -m pip install --upgrade pip
+          pip install selenium
+          pip install webdriver-manager
+          pip install beautifulsoup4
+          pip install pandas
+          pip install openpyxl
+          pip install requests
 
+      # 运行 spider.py 文件
       - name: Run spider.py
         run: |
           python spider.py
