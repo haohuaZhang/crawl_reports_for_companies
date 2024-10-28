@@ -13,6 +13,8 @@ import random
 import time
 from io import StringIO
 from openpyxl import load_workbook
+from openpyxl.utils.dataframe import dataframe_to_rows
+from openpyxl.styles import Alignment
 import requests
 from requests.exceptions import ConnectionError
 
@@ -196,9 +198,9 @@ def crawl_reports_for_companies(companies, years, target_tables, reportTypes = [
             for report_type, report_url in report_urls.items():
                 if report_url:
                     print(f"正在爬取 {company} 的 {report_type}...")
-
+                    sheet_name = f"{report_type}"
                     # 调用带重试机制的爬取函数，将数据写入 Excel 不同 sheet
-                    report = get_report_content_selenium(report_url, writer, target_tables)
+                    report = get_report_content_selenium(sheet_name, report_url, writer, target_tables)
                     
                     if report:
                         print(f"{company} 的 {report_type} 报告爬取成功")
@@ -216,12 +218,13 @@ def crawl_reports_for_companies(companies, years, target_tables, reportTypes = [
     return results
 
 # 使用Selenium爬取报告页面内容，带有重试机制
-def get_report_content_selenium(report_url, writer, target_tables = ['合并利润表'], retries=3):
+def get_report_content_selenium(sheet_name, report_url, writer, target_tables=['合并利润表'], retries=3):
     """
-    爬取报告页面内容，并将表格数据写入到 Excel 的不同 sheet。
+    爬取报告页面内容，并将表格数据写入到 Excel 的同一个 sheet。
     
     :param report_url: 报告的 URL
     :param writer: pd.ExcelWriter 对象，用于写入 Excel
+    :param target_tables: 要查找的目标表格名称列表
     :param retries: 重试次数
     """
     if not report_url:
@@ -231,7 +234,6 @@ def get_report_content_selenium(report_url, writer, target_tables = ['合并利�
         try:
             # 打开URL
             driver.get(report_url)
-            report_content = None
 
             # 等待页面加载
             WebDriverWait(driver, 5).until(
@@ -241,16 +243,34 @@ def get_report_content_selenium(report_url, writer, target_tables = ['合并利�
             # 获取页面源码
             page_source = driver.page_source
             soup = BeautifulSoup(page_source, 'html.parser')
+
+            # 设置 sheet 名称，随机生成避免冲突
+            workbook = writer.book
+            worksheet = workbook.create_sheet(title=sheet_name)
             
+            current_row = 1
+
             for target_table_name in target_tables:
                 # 寻找目标表格
                 target_p_list = soup.find_all('p', string=lambda s: s and target_table_name in s and len(s) < 50)
-    
+                
+                # 如果未找到匹配的表格名称，去掉“合并”重新查找
+                if not target_p_list and "合并" in target_table_name:
+                    simplified_name = target_table_name.replace("合并", "")
+                    target_p_list = soup.find_all('p', string=lambda s: s and simplified_name in s and len(s) < 50)
+                
                 if not target_p_list:
                     print(f"未找到匹配的表格名称：{target_table_name}")
-                    continue  # 跳过此表格名，继续下一个
+                    continue
 
                 target_p = target_p_list[0]  # 取第一个匹配项
+                table_title = target_p.get_text(strip=True)
+                
+                # 将表格标题写入Excel的当前行（不合并单元格）
+                cell = worksheet.cell(row=current_row, column=1, value=table_title)
+                cell.alignment = Alignment(horizontal='center')
+                current_row += 1  # 移到下一行准备写入表格数据
+
                 combined_df = pd.DataFrame()
 
                 # 遍历表格
@@ -265,33 +285,17 @@ def get_report_content_selenium(report_url, writer, target_tables = ['合并利�
                     next_div = next_div.find_next_sibling()
                     if not (next_div and next_div.name == 'div' and 'table-wrap' in next_div.get('class', [])):
                         break
-                
-                # 获取报告标题
-                content_div = soup.find('div', id='content')
-                p_tags = content_div.find_all('p') if content_div else []
-                
-                # 找到 th 标签
-                th_tag = soup.find('th', class_='head')
-                report_title = None
-                # 获取 th 标签中的文本内容，排除 font 标签的文本
-                if th_tag:
-                    # 使用 decompose 方法移除 font 标签
-                    for font_tag in th_tag.find_all('font'):
-                        font_tag.decompose()
 
-                    # 获取 th 标签剩余的文本内容
-                    report_title = th_tag.get_text(strip=True).replace("：", "")+f"-{target_table_name}"
-                    report_title = report_title.split("表", 1)[0] + "表"
+                # 写入DataFrame内容到Excel
+                for row in dataframe_to_rows(combined_df, index=False, header=True):
+                    for col, value in enumerate(row, start=1):
+                        worksheet.cell(row=current_row, column=col, value=value)
+                    current_row += 1  # 每写完一行数据，行号增加
 
-                print(f"report_title: {report_title}")
+                current_row += 5  # 表格之间的间隔
 
-                # 将数据写入Excel的不同 sheet
-                sheet_name = report_title if report_title else f"Sheet_{random.randint(1000, 9999)}"
-                combined_df.to_excel(writer, sheet_name=sheet_name, index=False)
-
-
-            # 成功则返回结果
-            return {'title': report_title, 'content': combined_df}
+            # 返回最后生成的标题和内容DataFrame用于检查或进一步使用
+            return {'title': sheet_name, 'content': combined_df}
 
         except ConnectionError as e:
             print(f"连接被拒绝，正在重试 {attempt + 1}/{retries} ... 错误: {e}")
@@ -299,12 +303,8 @@ def get_report_content_selenium(report_url, writer, target_tables = ['合并利�
         except Exception as e:
             print(f"爬取报告内容时出现错误: {e}")
             break  # 其他错误时停止重试
-        # finally:
-        #     if driver:
-        #         driver.quit()  # 确保浏览器关闭
     
     return None  # 如果重试失败，返回None
-
 
 # 解析报告中的研发费用和同比数据
 def extract_r_d_expenses(report_content):
@@ -361,12 +361,13 @@ def get_stock_code_by_company_name(company_name):
         return None
 
 # 示例调用
-# companies = ['艾为电子','圣邦股份','恒玄科技','杰理科技','纳芯微','中科蓝讯','杰华特','晶丰明源','思瑞浦','芯朋微','力芯微','博通集成','必易微','富满微','炬芯科技','微源股份']
-companies = ['艾为电子','圣邦股份']
-years = [2023, 2024]
-target_tables=['合并资产负债表2023年6月30日', '合并利润表','合并现金流量表']
+# companies = ['艾为电子','圣邦股份','恒玄科技','南芯科技','纳芯微','天德钰','中科蓝讯','杰华特','晶丰明源','英集芯','思瑞浦','芯朋微','中微半导','力芯微','必易微','富满微','明微电子','炬芯科技','帝奥微','新相微','希荻微']
+companies = ['中科蓝讯']
+# years = [2021, 2022, 2023]
+years = [2022]
+target_tables=['合并资产负债表', '合并利润表','合并现金流量表']
 # 'zqbg'是中报, 'ndbg'是年报
-reportTypes = ['zqbg', 'ndbg'];
+reportTypes = ['ndbg'];
 
 
 # 爬取报告并提取研发费用信息
