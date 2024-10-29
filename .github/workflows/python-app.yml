@@ -28,11 +28,13 @@ jobs:
           echo 'Pin-Priority: 1001' | sudo tee -a /etc/apt/preferences.d/mozilla-firefox
           sudo apt-get update
 
+          # 禁用 needrestart 的重启检查
+          echo "\$nrconf{restart} = 'a';" | sudo tee /etc/needrestart/needrestart.conf
+
           # 确保所有 Firefox 实例都已终止
           pkill -f firefox || true
 
-          # 设置环境变量以自动模式跳过 needrestart
-          sudo NEEDRESTART_MODE=a apt-get install -y firefox || true
+          sudo apt-get install -y firefox || true
 
           wget -q https://github.com/mozilla/geckodriver/releases/latest/download/geckodriver-v0.33.0-linux64.tar.gz
           tar -xzf geckodriver-v0.33.0-linux64.tar.gz
