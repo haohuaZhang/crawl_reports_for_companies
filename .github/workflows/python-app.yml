@@ -32,13 +32,9 @@ jobs:
           sudo rm -rf /var/lib/apt/lists/*
           sudo apt-get update
 
-      - name: Disable needrestart check
+      - name: Disable needrestart
         run: |
           echo "NEEDRESTART_SUSPEND=1" >> $GITHUB_ENV
-
-      - name: Configure needrestart
-        run: |
-          echo "$nrconf{restart} = 'a';" | sudo tee /etc/needrestart/needrestart.conf
 
       - name: Install Firefox and GeckoDriver
         run: |
