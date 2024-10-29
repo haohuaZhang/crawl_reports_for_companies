@@ -33,7 +33,7 @@ jobs:
 
       - name: Configure needrestart
         run: |
-          sudo perl -pi -e 's/^(\$nrconf\{restart\} =).*/$1 \'a\';/' /etc/needrestart/needrestart.conf
+          sudo perl -pi -e "s/^(\$nrconf\{restart\} =).*/$1 'a';/" /etc/needrestart/needrestart.conf
 
       - name: Install Firefox and GeckoDriver
         run: |
