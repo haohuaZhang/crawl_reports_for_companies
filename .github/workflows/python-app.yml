@@ -16,6 +16,12 @@ jobs:
         with:
           python-version: '3.x'
 
+      # 删除 needrestart，确保不会触发重启检查
+      - name: Remove needrestart
+        run: |
+          sudo apt-get update
+          sudo apt-get remove -y needrestart || true
+
       # 安装 Firefox 和 GeckoDriver（使用非 Snap 版本）
       - name: Install Firefox and GeckoDriver
         run: |
@@ -27,9 +33,6 @@ jobs:
           echo 'Pin: release o=LP-PPA-mozillateam' | sudo tee -a /etc/apt/preferences.d/mozilla-firefox
           echo 'Pin-Priority: 1001' | sudo tee -a /etc/apt/preferences.d/mozilla-firefox
           sudo apt-get update
-
-          # 禁用 needrestart 的重启检查
-          echo "\$nrconf{restart} = 'a';" | sudo tee /etc/needrestart/needrestart.conf
 
           # 确保所有 Firefox 实例都已终止
           pkill -f firefox || true
@@ -44,9 +47,6 @@ jobs:
           tar -xzf geckodriver-v0.33.0-linux64.tar.gz
           sudo mv geckodriver /usr/local/bin/
           rm geckodriver-v0.33.0-linux64.tar.gz
-
-          # 安装完毕后立即删除 needrestart
-          sudo apt-get remove -y needrestart || true
 
       # 安装 Python 依赖
       - name: Install dependencies
