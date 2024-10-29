@@ -23,13 +23,18 @@ jobs:
 
       - name: Remove Snap version of Firefox and clean up
         run: |
-          sudo snap remove firefox --purge
+          sudo snap remove firefox --purge || true
+          sudo apt-get remove --purge -y firefox || true
           sudo rm -rf /snap/firefox
           sudo rm -rf /var/snap/firefox
-          sudo rm -rf /etc/firefox
+          sudo rm -rf /etc/firefox || true
           sudo apt-get clean
           sudo rm -rf /var/lib/apt/lists/*
           sudo apt-get update
+
+      - name: Disable needrestart check
+        run: |
+          echo "NEEDRESTART_SUSPEND=1" >> $GITHUB_ENV
 
       - name: Install Firefox and GeckoDriver
         run: |
@@ -44,7 +49,7 @@ jobs:
           rm geckodriver-v0.33.0-linux64.tar.gz
 
       - name: Kill any existing Firefox processes
-        run: pkill -f firefox
+        run: pkill -f firefox || true
 
       - name: Run spider.py
         run: |
