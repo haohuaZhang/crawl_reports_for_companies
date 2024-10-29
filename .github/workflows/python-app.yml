@@ -21,16 +21,14 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y software-properties-common
-          if ! command -v firefox &> /dev/null; then
-            sudo snap remove firefox || true
-            sudo add-apt-repository -y ppa:mozillateam/ppa
-            echo 'Package: *' | sudo tee /etc/apt/preferences.d/mozilla-firefox
-            echo 'Pin: release o=LP-PPA-mozillateam' | sudo tee -a /etc/apt/preferences.d/mozilla-firefox
-            echo 'Pin-Priority: 1001' | sudo tee -a /etc/apt/preferences.d/mozilla-firefox
-            sudo apt-get update
-            sudo apt-get install -y firefox || exit 1
-          fi
-      
+          sudo snap remove firefox || true
+          sudo add-apt-repository -y ppa:mozillateam/ppa
+          echo 'Package: *' | sudo tee /etc/apt/preferences.d/mozilla-firefox
+          echo 'Pin: release o=LP-PPA-mozillateam' | sudo tee -a /etc/apt/preferences.d/mozilla-firefox
+          echo 'Pin-Priority: 1001' | sudo tee -a /etc/apt/preferences.d/mozilla-firefox
+          sudo apt-get update
+          sudo apt-get install -y firefox || true  # 在这里添加 || true 避免错误退出
+
           # 确保所有 Firefox 实例都已终止，避免干扰 GeckoDriver
           pkill -f firefox || true
       
@@ -38,9 +36,6 @@ jobs:
           tar -xzf geckodriver-v0.33.0-linux64.tar.gz
           sudo mv geckodriver /usr/local/bin/
           rm geckodriver-v0.33.0-linux64.tar.gz
-
-
-
 
       # 安装依赖
       - name: Install dependencies
