@@ -27,11 +27,13 @@ jobs:
           echo 'Pin: release o=LP-PPA-mozillateam' | sudo tee -a /etc/apt/preferences.d/mozilla-firefox
           echo 'Pin-Priority: 1001' | sudo tee -a /etc/apt/preferences.d/mozilla-firefox
           sudo apt-get update
-          sudo apt-get install -y firefox || true  # 在这里添加 || true 避免错误退出
 
-          # 确保所有 Firefox 实例都已终止，避免干扰 GeckoDriver
+          # 确保所有 Firefox 实例都已终止
           pkill -f firefox || true
-      
+
+          # 设置环境变量以自动模式跳过 needrestart
+          sudo NEEDRESTART_MODE=a apt-get install -y firefox || true
+
           wget -q https://github.com/mozilla/geckodriver/releases/latest/download/geckodriver-v0.33.0-linux64.tar.gz
           tar -xzf geckodriver-v0.33.0-linux64.tar.gz
           sudo mv geckodriver /usr/local/bin/
