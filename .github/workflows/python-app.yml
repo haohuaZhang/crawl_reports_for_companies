@@ -40,6 +40,9 @@ jobs:
           tar -xzf geckodriver-v0.33.0-linux64.tar.gz
           sudo mv geckodriver /usr/local/bin/
           rm geckodriver-v0.33.0-linux64.tar.gz
+      - name: Remove needrestart
+        run: |
+          sudo apt-get remove -y needrestart
 
       # 安装依赖
       - name: Install dependencies
