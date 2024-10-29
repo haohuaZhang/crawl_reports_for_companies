@@ -21,15 +21,16 @@ jobs:
           python -m pip install --upgrade pip
           pip install selenium beautifulsoup4 pandas openpyxl requests
 
-      - name: Remove Snap version of Firefox and clean up
+      - name: Clean up previous installations and directories
         run: |
-          sudo snap remove firefox --purge
-          sudo rm -rf /snap/firefox
-          sudo rm -rf /var/snap/firefox
-          sudo rm -rf /etc/firefox
-          sudo apt-get clean
-          sudo rm -rf /var/lib/apt/lists/*
           sudo apt-get update
+          sudo apt-get remove --purge -y firefox || true
+          sudo snap remove firefox || true
+          sudo rm -rf /etc/apport/native-origins.d/*
+          sudo rm -rf /var/lib/apt/lists/*
+          sudo apt-get clean
+          echo "NEEDRESTART_SUSPEND=1" >> $GITHUB_ENV
+          echo "$nrconf{restart} = 'a';" | sudo tee /etc/needrestart/needrestart.conf
 
       - name: Install Firefox and GeckoDriver
         run: |
