@@ -20,7 +20,7 @@ jobs:
       - name: Install Firefox and GeckoDriver
         run: |
           sudo apt-get update
-          sudo apt-get install -y software-properties-common
+          sudo apt-get install -y software-properties-common || true
           sudo snap remove firefox || true
           sudo add-apt-repository -y ppa:mozillateam/ppa
           echo 'Package: *' | sudo tee /etc/apt/preferences.d/mozilla-firefox
@@ -34,9 +34,9 @@ jobs:
           # 确保所有 Firefox 实例都已终止
           pkill -f firefox || true
 
-          # 检查并安装 Firefox，如果未安装则进行安装
+          # 检查并安装 Firefox
           if ! command -v firefox &> /dev/null; then
-            sudo apt-get install -y firefox
+            sudo apt-get install -y firefox || true
           fi
 
           # 下载并安装 GeckoDriver
@@ -45,7 +45,7 @@ jobs:
           sudo mv geckodriver /usr/local/bin/
           rm geckodriver-v0.33.0-linux64.tar.gz
 
-          # 安装完毕后立即删除 needrestart，防止后续重启检查
+          # 安装完毕后立即删除 needrestart
           sudo apt-get remove -y needrestart || true
 
       # 安装 Python 依赖
