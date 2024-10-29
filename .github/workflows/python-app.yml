@@ -26,14 +26,10 @@ jobs:
           sudo snap remove firefox --purge
           sudo rm -rf /snap/firefox
           sudo rm -rf /var/snap/firefox
-          sudo apt-get remove --purge -y firefox || true
+          sudo rm -rf /etc/firefox
           sudo apt-get clean
           sudo rm -rf /var/lib/apt/lists/*
           sudo apt-get update
-
-      - name: Configure needrestart
-        run: |
-          sudo perl -pi -e "s/^(\$nrconf\{restart\} =).*/$1 'a';/" /etc/needrestart/needrestart.conf
 
       - name: Install Firefox and GeckoDriver
         run: |
