@@ -23,9 +23,10 @@ jobs:
 
       - name: Remove Snap version of Firefox and clean up
         run: |
-          sudo snap remove firefox
+          sudo snap remove firefox --purge
           sudo rm -rf /snap/firefox
-          sudo apt-get remove --purge firefox || true
+          sudo rm -rf /var/snap/firefox
+          sudo rm -rf /etc/firefox
           sudo apt-get clean
           sudo rm -rf /var/lib/apt/lists/*
           sudo apt-get update
