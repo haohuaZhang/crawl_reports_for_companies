@@ -14,7 +14,7 @@ import time
 from io import StringIO
 from openpyxl import load_workbook
 from openpyxl.utils.dataframe import dataframe_to_rows
-from openpyxl.styles import Alignment
+from openpyxl.styles import Alignment, Font
 import requests
 from requests.exceptions import ConnectionError
 
@@ -64,7 +64,8 @@ options.add_argument('--disable-dev-shm-usage')
 
 
 # 指定 geckodriver 的路径，使用 Service 来设置
-service = Service('/usr/local/bin/geckodriver')
+# service = Service('/usr/local/bin/geckodriver')
+service = Service(GeckoDriverManager().install())
 # service = Service('D:\\work\\GitHub\\files\\geckodriver.exe')
 # 动态获取，不需要像上面一样判断系统是mac还是window
 # service = Service(GeckoDriverManager().install(), port=0)
@@ -243,6 +244,24 @@ def get_report_content_selenium(sheet_name, report_url, writer, target_tables=['
             # 获取页面源码
             page_source = driver.page_source
             soup = BeautifulSoup(page_source, 'html.parser')
+            
+             # 查找包含 “下载公告” 的链接
+            download_link = soup.find('a', string='下载公告')
+            if download_link and 'href' in download_link.attrs:
+                pdf_url = download_link['href']
+
+                # 下载 PDF 文件并保存到 pdfs 文件夹中
+                pdf_folder = 'pdfs'
+                os.makedirs(pdf_folder, exist_ok=True)  # 确保目录存在
+                pdf_path = os.path.join(pdf_folder, f'{sheet_name}.pdf')
+                
+                pdf_response = requests.get(pdf_url)
+                if pdf_response.status_code == 200:
+                    with open(pdf_path, 'wb') as pdf_file:
+                        pdf_file.write(pdf_response.content)
+                    print("PDF 文件下载成功，已保存为:", pdf_path)
+                else:
+                    print("PDF 文件下载失败，状态码:", pdf_response.status_code)
 
             # 设置 sheet 名称，随机生成避免冲突
             workbook = writer.book
@@ -269,6 +288,7 @@ def get_report_content_selenium(sheet_name, report_url, writer, target_tables=['
                 # 将表格标题写入Excel的当前行（不合并单元格）
                 cell = worksheet.cell(row=current_row, column=1, value=table_title)
                 cell.alignment = Alignment(horizontal='center')
+                worksheet.cell(row=current_row, column=1).font = Font(bold=True, size=14)  # 字体加粗，并设置字体大小为14
                 current_row += 1  # 移到下一行准备写入表格数据
 
                 combined_df = pd.DataFrame()
@@ -361,12 +381,13 @@ def get_stock_code_by_company_name(company_name):
         return None
 
 # 示例调用
-# companies = ['艾为电子','圣邦股份','恒玄科技','南芯科技','纳芯微','天德钰','中科蓝讯','杰华特','晶丰明源','英集芯','思瑞浦','芯朋微','中微半导','力芯微','必易微','富满微','明微电子','炬芯科技','帝奥微','新相微','希荻微']
-companies = ['中科蓝讯']
-# years = [2021, 2022, 2023]
-years = [2022]
-target_tables=['合并资产负债表', '合并利润表','合并现金流量表']
+companies = ['艾为电子','圣邦股份','恒玄科技','南芯科技','纳芯微','天德钰','中科蓝讯','杰华特','晶丰明源','英集芯','思瑞浦','芯朋微','中微半导','力芯微','必易微','富满微','明微电子','炬芯科技','帝奥微','新相微','希荻微']
+# companies = ['艾为电子']
+years = [2021, 2022, 2023]
+# years = [2021, 2022]
+target_tables=['合并资产负债表', '合并利润表','合并现金流量表','员工情况']
 # 'zqbg'是中报, 'ndbg'是年报
+# reportTypes = ['zqbg', 'ndbg']
 reportTypes = ['ndbg'];
 
 
