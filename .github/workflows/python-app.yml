@@ -48,6 +48,10 @@ jobs:
           sudo chmod +x /usr/local/bin/geckodriver
           rm geckodriver-v0.33.0-linux64.tar.gz
 
+      - name: Verify GeckoDriver installation
+        run: |
+          geckodriver --version
+
       - name: Kill any existing Firefox processes
         run: pkill -f firefox
 
