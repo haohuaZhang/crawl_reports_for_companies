@@ -52,7 +52,7 @@ def build_announcement_urls(stock_id, reportTypes):
     for currentType in reportTypes:
         url = f'https://vip.stock.finance.sina.com.cn/corp/go.php/vCB_Bulletin/stockid/{stock_id}/page_type/{currentType}.phtml'
         urls.append(url)
-    
+
     return urls
 
 # 配置 Firefox 浏览器选项
@@ -64,8 +64,8 @@ options.add_argument('--disable-dev-shm-usage')
 
 
 # 指定 geckodriver 的路径，使用 Service 来设置
-# service = Service('/usr/local/bin/geckodriver')
-service = Service(GeckoDriverManager().install())
+service = Service('/usr/local/bin/geckodriver')
+# service = Service(GeckoDriverManager().install())
 # service = Service('D:\\work\\GitHub\\files\\geckodriver.exe')
 # 动态获取，不需要像上面一样判断系统是mac还是window
 # service = Service(GeckoDriverManager().install(), port=0)
@@ -94,7 +94,7 @@ def get_reports_urls(soup, years):
             
             # 检查文本是否包含“半年度报告”或“年度报告”，且年份在 years 数组中
             for year in years:
-                if ('半年度报告' in link_text or '年度报告' in link_text) and str(year) in link_text:
+                if ('半年度报告' in link_text or '年度报告' in link_text or '三季度报告' in link_text or '一季度报告' in link_text ) and str(year) in link_text:
                     # 满足条件的链接加入 links 列表
                     links.append(a_tag)
     
@@ -177,7 +177,7 @@ output_file = os.path.join(directory, new_filename)
 
 # 主函数，爬取多个公司的报告并提取研发费用信息
 # 示例：如何调用函数将不同的报告保存到同一个 Excel 文件
-def crawl_reports_for_companies(companies, years, target_tables, reportTypes = ['zqbg', 'ndbg']):
+def crawl_reports_for_companies(companies, years, target_tables, reportTypes = ['zqbg', 'ndbg', 'sjdbg']):
     results = []
     
     # 创建 ExcelWriter 对象，用于写入多个 sheet
@@ -238,7 +238,7 @@ def get_report_content_selenium(sheet_name, report_url, writer, target_tables=['
 
             # 等待页面加载
             WebDriverWait(driver, 5).until(
-                EC.presence_of_element_located((By.CSS_SELECTOR, 'div.table-wrap'))
+                EC.presence_of_element_located((By.CSS_SELECTOR, 'div.clearit'))
             )
 
             # 获取页面源码
@@ -381,14 +381,15 @@ def get_stock_code_by_company_name(company_name):
         return None
 
 # 示例调用
-companies = ['艾为电子','圣邦股份','恒玄科技','南芯科技','纳芯微','天德钰','中科蓝讯','杰华特','晶丰明源','英集芯','思瑞浦','芯朋微','中微半导','力芯微','必易微','富满微','明微电子','炬芯科技','帝奥微','新相微','希荻微']
-# companies = ['艾为电子']
-years = [2021, 2022, 2023]
-# years = [2021, 2022]
-target_tables=['合并资产负债表', '合并利润表','合并现金流量表','员工情况']
-# 'zqbg'是中报, 'ndbg'是年报
+# companies = ['艾为电子','圣邦股份','恒玄科技','南芯科技','纳芯微','天德钰','中科蓝讯','杰华特','晶丰明源','英集芯','思瑞浦','芯朋微','中微半导','力芯微','必易微','富满微','明微电子','炬芯科技','帝奥微','新相微','希荻微']
+companies = ['艾为电子','芯朋微']
+# years = [2021, 2022, 2023]
+years = [2024,2023]
+# target_tables=['合并资产负债表', '合并利润表','合并现金流量表','员工情况']
+target_tables=['合并资产负债表', '合并利润表']
+# 'zqbg'是中报, 'ndbg'是年报, 'sjdbg'是三季报, 'yjdbg'是一季度报告
 # reportTypes = ['zqbg', 'ndbg']
-reportTypes = ['ndbg'];
+reportTypes = ['sjdbg'];
 
 
 # 爬取报告并提取研发费用信息
