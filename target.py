@@ -38,8 +38,10 @@ options.add_argument('--headless')
 options.add_argument('--no-sandbox')
 options.add_argument('--disable-dev-shm-usage')
 
+# 指定 geckodriver 的路径，使用 Service 来设置
+service = Service('/usr/local/bin/geckodriver')
 # 指定 geckodriver 的路径
-service = Service(GeckoDriverManager().install())
+# service = Service(GeckoDriverManager().install())
 
 # 创建 WebDriver 实例
 driver = webdriver.Firefox(service=service, options=options)
@@ -64,7 +66,7 @@ new_filename = f'targets{max_number + 1}.xlsx'
 output_file = os.path.join(directory, new_filename)
 
 # 主函数，爬取多个公司的报告并提取研发费用信息
-def crawl_reports_for_companies(companies, years, reportTypes=['zqbg', 'ndbg']):
+def crawl_reports_for_companies(companies, years, dataTab=1, dateTab=1):
     results = []
     with pd.ExcelWriter(output_file, engine='openpyxl') as writer:
         for company in companies:
@@ -81,7 +83,7 @@ def crawl_reports_for_companies(companies, years, reportTypes=['zqbg', 'ndbg']):
             sheet_name = f"{company}-{report_type}"
             
             retries = 3  # 设置重试次数
-            report = get_report_content_selenium(sheet_name, report_url, writer, years, retries)
+            report = get_report_content_selenium(sheet_name, report_url, writer, years, retries, dataTab, dateTab)
             
             if report:
                 print(f"{company} 的 {report_type} 报告爬取成功")
@@ -102,7 +104,7 @@ def crawl_reports_for_companies(companies, years, reportTypes=['zqbg', 'ndbg']):
     return results
 
 # 使用 Selenium 爬取报告页面内容，带有重试机制
-def get_report_content_selenium(sheet_name, report_url, writer, years, retries=5, retry_delay=10):
+def get_report_content_selenium(sheet_name, report_url, writer, years, retries=5, dataTab=1, dateTab=1, retry_delay=10):
     if not report_url:
         return None
 
@@ -116,8 +118,24 @@ def get_report_content_selenium(sheet_name, report_url, writer, years, retries=5
             )
 
             cwfx_div = driver.find_element(By.CLASS_NAME, 'cwfx')
-            date_tab_li = cwfx_div.find_element(By.XPATH, './/ul[@class="dateTab"]/li[2]')
-            date_tab_li.click()
+
+            # 切换左边的日期分组
+            if dataTab != 1:
+                print(f"正在切换到 按单季度 日期分组")
+                data_tab_li = cwfx_div.find_element(By.XPATH, './/ul[@class="dataTab"]/li[2]')
+                data_tab_li.click()
+            else:
+                print(f"正在默认 按报告期 日期分组")
+            
+            # 切换右边的数据分组
+            if dateTab != 1:
+                date_tab_li = cwfx_div.find_element(By.XPATH, f'.//ul[@class="dateTab"]/li[{dateTab}]')
+                text = date_tab_li.text.strip()
+                print(f"正在切换到 {text} 数据分组")
+                date_tab_li.click()
+            else:
+                print(f"正在默认 全部 数据分组")
+            
             
             time.sleep(random.uniform(3, 7))
             
@@ -219,8 +237,14 @@ def get_stock_code_by_company_name(company_name):
 
 # 示例调用
 companies = ['艾为电子','圣邦股份','恒玄科技','南芯科技','纳芯微','天德钰','中科蓝讯','杰华特','晶丰明源','英集芯','思瑞浦','芯朋微','中微半导','力芯微','必易微','富满微','明微电子','炬芯科技','帝奥微','新相微','希荻微']
-# companies = ['艾为电子']
-years = [2023, 2022, 2021]
-reportTypes = ['ndbg']
+# companies = ['希荻微']
+years = [2024, 2023]
 
-results = crawl_reports_for_companies(companies, years, reportTypes)
+# 默认 按报告期为1， 按单季度为2
+dataTab=2
+
+# 当dataTab为1时，即 按报告期,对应的是1:全部，2:年报， 3:三季报，4:中报，5:一季报
+# 当dataTab为1时，即 按单季度,对应的是1:全部，2:四季度， 3:三季度，4:二季度，5:一季度
+dateTab=1
+
+results = crawl_reports_for_companies(companies, years, dataTab, dateTab)
